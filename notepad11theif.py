@@ -223,8 +223,8 @@ def main():
         for open_share in open_shares:
             print('')
             try:
-                if logging.getLogger().level == logging.DEBUG:
-                    print('{} Attempting to access share "{}"'.format(blue_plus, open_share))
+
+                print('{} Attempting to access share "{}"'.format(blue_plus, open_share))
                 tid, pwd, share = use_smb_share(open_share, smbClient)
 
             except Exception as e:
@@ -240,8 +240,8 @@ def main():
                     print(str(e))
                     continue
             else:
-                if logging.getLogger().level == logging.DEBUG:
-                    print('{} Share "{}" was successfully mounted'.format(blue_plus, open_share))
+
+                print('{} Share "{}" was successfully mounted'.format(blue_plus, open_share))
                 if open_share == 'Users':
                     if logging.getLogger().level == logging.DEBUG:
                         print('{} We have the Users share'.format(blue_plus))
@@ -259,7 +259,7 @@ def main():
                                 tabstate_files = ls(tid, pwd + all_files_in_shares_root[i][0] + '\\AppData\\Local\\Packages\\Microsoft.WindowsNotepad_8wekyb3d8bbwe\\LocalState\\TabState\\', '', smbClient, share) # try and ls the tabstate dir
                                 if logging.getLogger().level == logging.DEBUG:
                                     print("{} {} is a valid directory".format(blue_plus, pwd + all_files_in_shares_root[i][0] + '\\AppData\\Local\\Packages\\Microsoft.WindowsNotepad_8wekyb3d8bbwe\\LocalState\\TabState\\'))
-                                if len(tabstate_files) > 0: # if there are tabstate files
+                                if len(tabstate_files)-2 > 0: # if there are tabstate files
                                     if logging.getLogger().level == logging.DEBUG:
                                         print('{} tabstate_files is > 0'.format(blue_plus))
                                     for j in range(len(tabstate_files)): # iterate through each one
@@ -275,8 +275,8 @@ def main():
                                                 get_file(tid, pwd + all_files_in_shares_root[i][0] + '\\AppData\\Local\\Packages\\Microsoft.WindowsNotepad_8wekyb3d8bbwe\\LocalState\\TabState\\', smbClient, share, tabstate_files[j][0])
                                                 gotten_files.append(all_files_in_shares_root[i][0] + '\\AppData\\Local\\Packages\\Microsoft.WindowsNotepad_8wekyb3d8bbwe\\LocalState\\TabState\\' + tabstate_files[j][0])
                                                 file_names.append(tabstate_files[j][0]) # we use this to read the local files later
-                                                if logging.getLogger().level == logging.DEBUG:
-                                                    print('{} Got File {}'.format(blue_plus, tabstate_files[j][0]))
+
+                                                print('{} Got File {}'.format(blue_plus, tabstate_files[j][0]))
                                             elif logging.getLogger().level == logging.DEBUG:
                                                 print('{} File {} already in gotten_files, skipping'.format(yellow_minus, all_files_in_shares_root[i][0] + '\\AppData\\Local\\Packages\\Microsoft.WindowsNotepad_8wekyb3d8bbwe\\LocalState\\TabState\\' + tabstate_files[j][0]))
                                         except Exception as e:
@@ -345,8 +345,7 @@ def main():
                                                 get_file(tid, pwd + all_files_in_shares_root[i][0] + '\\AppData\\Local\\Packages\\Microsoft.WindowsNotepad_8wekyb3d8bbwe\\LocalState\\TabState\\', smbClient, share, tabstate_files[j][0])
                                                 gotten_files.append(all_files_in_shares_root[i][0] + '\\AppData\\Local\\Packages\\Microsoft.WindowsNotepad_8wekyb3d8bbwe\\LocalState\\TabState\\' + tabstate_files[j][0])
                                                 file_names.append(tabstate_files[j][0]) # we use this to read the local files later
-                                                if logging.getLogger().level == logging.DEBUG:
-                                                    print('{} Got File {}'.format(blue_plus, tabstate_files[j][0]))
+                                                print('{} Got File {}'.format(blue_plus, tabstate_files[j][0]))
                                             elif logging.getLogger().level == logging.DEBUG:
                                                 print('{} File {} already in gotten_files, skipping'.format(yellow_minus, all_files_in_shares_root[i][0] + '\\AppData\\Local\\Packages\\Microsoft.WindowsNotepad_8wekyb3d8bbwe\\LocalState\\TabState\\' + tabstate_files[j][0]))
                                         except Exception as e:

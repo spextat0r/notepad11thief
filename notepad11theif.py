@@ -7,12 +7,6 @@
 # of the Apache Software License. See the accompanying LICENSE file
 # for more information.
 #
-# Description:
-#   Mini shell using some of the SMB functionality of the library
-#
-# Author:
-#   Alberto Solino (@agsolino)
-#
 # Reference for:
 #   SMB DCE/RPC
 #
@@ -315,10 +309,10 @@ def main():
                     pwd = pwd+'Users\\'
                     if logging.getLogger().level == logging.DEBUG:
                         print('{} We have the C$ share'.format(blue_plus))
-                        print('{} Attempting to ls the C$ folder'.format(blue_plus))
+                        print('{} Attempting to ls the C$\\Users folder'.format(blue_plus))
                     all_files_in_shares_root = ls(tid, pwd, '', smbClient, share)  # get a files in the root folder for the share
                     if logging.getLogger().level == logging.DEBUG:
-                        print('{} Successfully lsed the C$ folder'.format(blue_plus))
+                        print('{} Successfully lsed the C$\\Users folder'.format(blue_plus))
                     for i in range(len(all_files_in_shares_root)):  # iterate through each file/folder
                         if all_files_in_shares_root[i][1] == 16:  # if it is a directory it will == 16 so this only check directories
                             if logging.getLogger().level == logging.DEBUG:
@@ -394,6 +388,11 @@ def main():
             import traceback
             traceback.print_exc()
         logging.error(str(e))
+    else: # so we dont try and logoff if an error occurred
+        # done with smb so we logoff now
+        if logging.getLogger().level == logging.DEBUG:
+            print('{} Logging off of SMB now'.format(blue_plus))
+        smbClient.logoff()
 
     for file in file_names:
         parse_data(file)

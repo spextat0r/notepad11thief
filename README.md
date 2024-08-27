@@ -1,5 +1,7 @@
 # notepad11thief
 
+Based off of John Hammond's ![video](https://www.youtube.com/watch?v=zSSBbv2fc2s)
+
 <img src="https://raw.githubusercontent.com/samiam1086/notepad11thief/main/mikrosoft.png" width="700" height="786">
 
 TODO add support for sublime and notepad++ autosave files ;)
